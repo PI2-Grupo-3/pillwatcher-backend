@@ -3,9 +3,15 @@ language: java
 jdk:
   - oraclejdk8
 
+addons:
+  sonarcloud:
+    organization: "PI2-Grupo-3"
+    token: ${SONAR_TOKEN}
+
 stages:
   - Build
   - Test
+#  - SonarQube Analysis
 
 jobs:
   include:
@@ -13,7 +19,10 @@ jobs:
     script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - stage: Test
     script: mvn test
+#  - stage: SonarQube Analysis
+#    script: mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=pi2-grupo-3_pillwatcher-dpb-service
 
 cache:
   directories:
   - $HOME/.m2
+  - $HOME/.sonar/cache
