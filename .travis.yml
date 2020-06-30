@@ -4,12 +4,15 @@ jdk:
   - oraclejdk8
 
 stages:
-  - build
+  - Build
+  - Test
 
 jobs:
   include:
-  - stage: build
+  - stage: Build
     script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - stage: Test
+    script: mvn test
 
 cache:
   directories:
