@@ -67,7 +67,7 @@ $ docker-compose up -d # This command will do the same but without logs and you 
 ```
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26889570/86516573-2051eb00-bdf8-11ea-80b8-6502cc14b975.png" alt="PillWatcher Docker Config" width="738">
+  <img src="https://github.com/PI2-Grupo-3/pillwatcher-dpb-service/blob/master/images/pillwatcher_docker.gif" alt="PillWatcher Logo" width="738">
 </p>
 
 > To see docker-compose logs using -d flag, use the command _docker-compose --logs_
