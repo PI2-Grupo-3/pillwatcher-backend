@@ -1,10 +1,3 @@
-#create a network and add our services into this network:
-#so, "app" service will be able to connect to the mysql database from "db" servoce by the hostname="db":
-#jdbc:mysql://db:3306/DOCKERDB
-
-#Connection url for connection in the DatabaseView:
-#  jdbc:mysql://db:3306/DOCKERDB, login=root, password=root
-#App is available at: http://localhost:8080/entitybus/post
 version: "3"
 
 services:
@@ -17,14 +10,18 @@ services:
       - db
     ports:
       - "8080:8080"
-
   db:
     container_name: db
     image: mysql/mysql-server:5.7
     environment:
       MYSQL_USER: dpb
       MYSQL_DATABASE: dpb
-      MYSQL_ROOT_PASSWORD: dpb123
-      MYSQL_PASSWORD: dpb123
+      MYSQL_ROOT_PASSWORD: tdrfFj/YjxBKD2*T
+      MYSQL_PASSWORD: tdrfFj/YjxBKD2*T
     ports:
       - "3306:3306"
+    volumes:
+      - dpb-volume:/opt/mysql_data
+
+volumes:
+  dpb-volume:

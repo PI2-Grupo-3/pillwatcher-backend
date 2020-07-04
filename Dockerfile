@@ -2,6 +2,7 @@ FROM openjdk:8
 
 ADD . /dpb_project
 WORKDIR /dpb_project
+
 RUN apt-get update && apt-get install -y maven
 RUN mvn package
 
