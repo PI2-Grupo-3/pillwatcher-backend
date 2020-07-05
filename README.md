@@ -1,4 +1,4 @@
-# Dispenser Backend (DPB) - Pillwatcher ![](https://travis-ci.com/PI2-Grupo-3/pillwatcher-dpb-service.svg?branch=master)
+# Dispenser Backend (DPB) - Pillwatcher ![](https://travis-ci.com/PillWatcher/pillwatcher-dpb-service.svg?branch=master)
 
 <img src="https://sonarcloud.io/api/project_badges/quality_gate?project=PI2-Grupo-3_pillwatcher-dpb-service" align="right"
      alt="Sonar Cloud Quality Gate Status" width="120" height="178">
@@ -11,7 +11,7 @@ DPB Service is an API aimed at feeding any patient's Medication and Prescription
 * Implements **HATEOAS** pattern
 
 <p align="center">
-  <img src="https://github.com/PI2-Grupo-3/pillwatcher-dpb-service/blob/master/images/undraw_doctor_kw5l.png" alt="Undraw Doctor" width="738">
+  <img src="https://github.com/PI2-Grupo-3/pillwatcher-dpb-service/blob/master/images/pillwatcher_logo.jpg" alt="PillWatcher Logo" width="738">
 </p>
 
 ## Usage
