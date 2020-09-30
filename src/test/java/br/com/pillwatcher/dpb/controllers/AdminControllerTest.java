@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AdminControllerTest {
+class AdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,7 +38,7 @@ public class AdminControllerTest {
     }
 
     @Test
-    public void createAdminShouldReturnStatusCreated() throws Exception {
+    void createAdminShouldReturnStatusCreated() throws Exception {
         //given
 
         Gson gson = new Gson();

@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 public abstract class BaseException extends RuntimeException {
 
-    private ErrorCodeEnum errorCodeEnum;
-    private ErrorMessages errorMessages;
+    private final ErrorCodeEnum errorCodeEnum;
+    private final ErrorMessages errorMessages;
 
     public BaseException (
             final ErrorCodeEnum errorCodeEnum,

@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DpbApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AdminControllerITTest {
+class AdminControllerITTest {
 
     @Autowired
     private AdminRepository repository;
@@ -44,13 +44,13 @@ public class AdminControllerITTest {
     private Admin admin;
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         this.repository.deleteAll();
         this.repository.flush();
     }
 
     @Test
-    public void createAdminShouldReturnCreatedStatus() {
+    void createAdminShouldReturnCreatedStatus() {
         //given
         String path = UriComponentsBuilder
                 .fromUriString(URI_ADMINS)
