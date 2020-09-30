@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 import static br.com.pillwatcher.dpb.constants.TestConstants.getAdminDtoForCreate;
 
 @SpringBootTest
-class AdminServiceTest {
+public class AdminServiceTest {
 
     @Autowired
     private AdminService service;
@@ -33,7 +33,7 @@ class AdminServiceTest {
     private AdminRepository repository;
 
     @Test
-    void createAdminShouldReturnCreatedStatus() {
+    public void createAdminShouldReturnCreatedStatus() {
         //given
         AdminDTOForCreate admin = getAdminDtoForCreate();
 
@@ -50,7 +50,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void creatAdminShouldReturnAlreadyExistsStatus() {
+    public void createAdminShouldReturnAlreadyExistsStatus() {
         Assertions.assertThrows(AdminException.class, () -> {
             //given
             AdminDTOForCreate admin = getAdminDtoForCreate();
