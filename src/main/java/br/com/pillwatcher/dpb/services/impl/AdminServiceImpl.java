@@ -77,6 +77,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public Admin findAdmin(final String document) {
+
+        log.info("AdminServiceImpl.findAdmin - Start - Input {}", document);
+
         Optional<Admin> admin = repository.findAdminByUserDocument(document);
 
         if (!admin.isPresent()) {
@@ -86,5 +89,22 @@ public class AdminServiceImpl implements AdminService {
         }
 
         return admin.get();
+    }
+
+    @Override
+    @Transactional
+    public void deleteAdmin(final String document) {
+
+        log.info("AdminServiceImpl.deleteAdmin - Start - Input {}", document);
+
+        Optional<Admin> admin = repository.findAdminByUserDocument(document);
+
+        if (!admin.isPresent()) {
+            log.warn(ValidationConstraints.ADMIN_NOT_FOUND, document);
+            throw new AdminException(ErrorCodeEnum.ADMIN_NOT_FOUND, ErrorMessages.NOT_FOUND,
+                    StringUtils.replace(ValidationConstraints.ADMIN_NOT_FOUND, "{}", document));
+        }
+
+        repository.delete(admin.get());
     }
 }

@@ -77,6 +77,23 @@ public class AdminController implements AdminsApi {
         log.debug("AdminController.updateAdmin - End - Input: {} - Output: {}", cpf, response);
 
         return response;
+    }
 
+    @Override
+    @DeleteMapping(value = URI_ADMINS_CPF)
+    public ResponseEntity<Void> deleteAdmin(final String cpf) {
+
+        log.info("AdminController.deleteAdmin - Start - Input - [{}]", cpf);
+        log.debug("AdminController.deleteAdmin - Start - Input - Order: {} ", cpf);
+
+        service.deleteAdmin(cpf);
+
+        ResponseEntity<Void> response = ResponseEntity
+                .ok()
+                .build();
+
+        log.debug("AdminController.deleteAdmin - End - Input: {} - Output: {}", cpf, response);
+
+        return response;
     }
 }

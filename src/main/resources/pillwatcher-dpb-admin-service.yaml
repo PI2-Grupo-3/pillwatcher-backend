@@ -192,7 +192,69 @@ paths:
             application/json:
               code: ADMIN_NOT_FOUND
               message: "Entity not found"
-              details: ["Admin with id *** not found"]
+              details: ["Admin with CPF *** not found"]
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNEXPECTED_ERROR
+              message: "Internal server error"
+              details: ["Internal server error"]
+    delete:
+      summary: 'Delete a Admin from given CPF'
+      description: 'Delete a Admin from given CPF'
+      tags:
+        - Admin
+      operationId: "deleteAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: cpf
+          description: 'Admin Official Document (CPF)'
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: VALIDATION_ERROR
+              message: "Validation failed"
+              details: ["Constraint violation"]
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNAUTHORIZED
+              message: "Unauthorized"
+              details: ["Unauthorized"]
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: FORBIDDEN
+              message: "Forbidden"
+              details: ["Forbidden"]
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: ADMIN_NOT_FOUND
+              message: "Entity not found"
+              details: ["Admin with CPF *** not found"]
         '500':
           description: Unexpected error
           schema:

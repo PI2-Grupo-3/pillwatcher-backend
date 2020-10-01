@@ -113,4 +113,26 @@ public class AdminServiceTest {
             Admin updated = service.findAdmin(FAKE_CPF);
         });
     }
+
+    @Test
+    public void deleteAdminShouldReturnOkStatus() {
+        //when
+        when(repository.findAdminByUserDocument(anyString()))
+                .thenReturn(Optional.of(getAdmin()));
+
+        //then
+        service.deleteAdmin(FAKE_CPF);
+    }
+
+    @Test
+    public void deleteAdminShouldReturnNotFoundStatus() {
+        Assertions.assertThrows(AdminException.class, () -> {
+            //when
+            when(repository.findAdminByUserDocument(anyString()))
+                    .thenReturn(Optional.empty());
+
+            //then
+            service.deleteAdmin(FAKE_CPF);
+        });
+    }
 }
