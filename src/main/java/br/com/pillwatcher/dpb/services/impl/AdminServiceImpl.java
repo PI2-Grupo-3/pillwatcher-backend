@@ -3,7 +3,6 @@ package br.com.pillwatcher.dpb.services.impl;
 import br.com.pillwatcher.dpb.constants.ErrorMessages;
 import br.com.pillwatcher.dpb.constants.ValidationConstraints;
 import br.com.pillwatcher.dpb.entities.Admin;
-import br.com.pillwatcher.dpb.entities.User;
 import br.com.pillwatcher.dpb.exceptions.AdminException;
 import br.com.pillwatcher.dpb.mappers.AdminMapper;
 import br.com.pillwatcher.dpb.repositories.AdminRepository;
