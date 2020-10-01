@@ -138,4 +138,27 @@ public class AdminControllerTest {
                 .andExpect(jsonPath("$.email", equalTo(admin.getEmail())));
     }
 
+    @Test
+    public void deleteAdminShouldReturnStatusOk() throws Exception {
+        //given
+        String path = UriComponentsBuilder
+                .fromUriString(URI_ADMINS_CPF)
+                .buildAndExpand(FAKE_CPF)
+                .getPath();
+
+        assert path != null;
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete(path)
+                .accept(MediaType.APPLICATION_JSON);
+
+        MockHttpServletResponse response = this.mockMvc
+                .perform(requestBuilder)
+                .andReturn()
+                .getResponse();
+
+        //then
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
 }

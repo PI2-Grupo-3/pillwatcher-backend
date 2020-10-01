@@ -12,4 +12,6 @@ public interface AdminService {
 
     Admin findAdmin(String document);
 
+    void deleteAdmin(String document);
+
 }
