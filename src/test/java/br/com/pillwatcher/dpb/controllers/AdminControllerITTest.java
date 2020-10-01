@@ -5,6 +5,7 @@ import br.com.pillwatcher.dpb.entities.Admin;
 import br.com.pillwatcher.dpb.mappers.AdminMapper;
 import br.com.pillwatcher.dpb.repositories.AdminRepository;
 import io.swagger.model.AdminDTOForCreate;
+import io.swagger.model.AdminDTOForUpdate;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,9 +21,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-import static br.com.pillwatcher.dpb.constants.TestConstants.getAdmin;
-import static br.com.pillwatcher.dpb.constants.TestConstants.getUrl;
+import static br.com.pillwatcher.dpb.constants.TestConstants.*;
 import static br.com.pillwatcher.dpb.constants.UrlConstants.URI_ADMINS;
+import static br.com.pillwatcher.dpb.constants.UrlConstants.URI_ADMINS_CPF;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = DpbApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -74,5 +75,30 @@ public class AdminControllerITTest {
         List<Admin> adminList = this.repository.findAll();
         assertEquals(1, adminList.size());
 
+    }
+
+    @Test
+    public void updateAdminShouldReturnOkStatus() {
+        //given
+        String path = UriComponentsBuilder
+                .fromUriString(URI_ADMINS_CPF)
+                .buildAndExpand(FAKE_CPF)
+                .getPath();
+
+        repository.save(getAdmin());
+
+        Admin admin = getAdmin();
+        AdminDTOForUpdate adminDto = mapper.toAdminForUpdate(admin);
+
+        HttpEntity<AdminDTOForUpdate> entity = new HttpEntity<>(adminDto);
+
+        ResponseEntity<Void> response = this.testRestTemplate.exchange(
+                getUrl(path, this.port),
+                HttpMethod.PUT,
+                entity,
+                Void.class);
+
+        //then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }

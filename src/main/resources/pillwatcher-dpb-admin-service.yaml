@@ -12,10 +12,10 @@ schemes:
 tags:
   - name: Admin
 paths:
-  /admins:
+  '/admins':
     post:
-      summary: "Add a new Admin to Pillwatcher"
-      description: "Add a new Admin to Pillwatcher"
+      summary: 'Add a new Admin to Pillwatcher'
+      description: 'Add a new Admin to Pillwatcher'
       tags:
         - Admin
       operationId: "createAdmin"
@@ -68,6 +68,140 @@ paths:
               code: UNEXPECTED_ERROR
               message: "Internal server error"
               details: ["Internal server error"]
+  '/admins/{cpf}':
+    get:
+      description: 'Get Admin Data from Specific Id'
+      summary: 'Get Admin Data from Specific Id'
+      tags:
+        - Admin
+      operationId: "getAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: cpf
+          description: 'Admin Official Document (CPF)'
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Admin Object'
+          schema:
+            $ref: '#/definitions/AdminDTOForGet'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: VALIDATION_ERROR
+              message: "Validation failed"
+              details: ["Bad Request"]
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNAUTHORIZED
+              message: "Unauthorized"
+              details: ["Unauthorized"]
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: FORBIDDEN
+              message: "Forbidden"
+              details: ["Forbidden"]
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: ADMIN_NOT_FOUND
+              message: "Entity not found"
+              details: ["Admin with id *** not found"]
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNEXPECTED_ERROR
+              message: "Internal server error"
+              details: ["Internal server error"]
+    put:
+      summary: 'Update a Admin info on Pillwatcher'
+      description: 'Update a Admin info on Pillwatcher'
+      tags:
+        - Admin
+      operationId: "updateAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: adminDtoForUpdate
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AdminDTOForUpdate'
+        - name: cpf
+          description: 'Admin Official Document (CPF)'
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Admin Object'
+          schema:
+            $ref: '#/definitions/AdminDTOForResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: VALIDATION_ERROR
+              message: "Validation failed"
+              details: ["Bad Request"]
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNAUTHORIZED
+              message: "Unauthorized"
+              details: ["Unauthorized"]
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: FORBIDDEN
+              message: "Forbidden"
+              details: ["Forbidden"]
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: ADMIN_NOT_FOUND
+              message: "Entity not found"
+              details: ["Admin with id *** not found"]
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Fault'
+          examples:
+            application/json:
+              code: UNEXPECTED_ERROR
+              message: "Internal server error"
+              details: ["Internal server error"]
 definitions:
   AdminDTOForCreate:
     type: 'object'
@@ -85,6 +219,48 @@ definitions:
         type: string
         minLength: 11
         maxLength: 11
+      imageUrl:
+        description: 'Image Url from S3'
+        example: 'https://s3.com/image_from_user.jpg'
+        type: string
+      email:
+        description: 'Admin Email'
+        example: 'logan.warden@email.com'
+        type: string
+  AdminDTOForGet:
+    type: 'object'
+    description: 'Structure used to create a Admin on Pillwatcher'
+    properties:
+      name:
+        description: 'Admin name'
+        example: 'Logan Warden'
+        type: string
+        minLength: 3
+        maxLength: 120
+      document:
+        description: 'Admin Official Document (CPF)'
+        example: '12345678910'
+        type: string
+        minLength: 11
+        maxLength: 11
+      email:
+        description: 'Admin Email'
+        example: 'logan.warden@email.com'
+        type: string
+      imageUrl:
+        description: 'Image Url from S3'
+        example: 'https://s3.com/image_from_user.jpg'
+        type: string
+  AdminDTOForUpdate:
+    type: 'object'
+    description: 'Structure used to update Admin info on Pillwatcher'
+    properties:
+      name:
+        description: 'Admin name'
+        example: 'Logan Warden'
+        type: string
+        minLength: 3
+        maxLength: 120
       imageUrl:
         description: 'Image Url from S3'
         example: 'https://s3.com/image_from_user.jpg'
@@ -117,6 +293,7 @@ definitions:
     enum:
       - ACCESS_DENIED
       - ADMIN_ALREADY_EXISTS
+      - ADMIN_NOT_FOUND
       - INVALID_PARAMETER
       - TOO_MANY_REQUESTS
       - UNEXPECTED_ERROR
