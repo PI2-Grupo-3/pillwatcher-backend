@@ -3,6 +3,7 @@ package br.com.pillwatcher.dpb.controllers;
 import br.com.pillwatcher.dpb.entities.Admin;
 import br.com.pillwatcher.dpb.mappers.AdminMapper;
 import br.com.pillwatcher.dpb.services.AdminService;
+import io.swagger.annotations.Api;
 import io.swagger.api.AdminsApi;
 import io.swagger.model.AdminDTOForCreate;
 import io.swagger.model.AdminDTOForGet;
@@ -22,6 +23,7 @@ import static br.com.pillwatcher.dpb.constants.UrlConstants.URI_ADMINS_CPF;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@Api(tags = {"Admin"})
 public class AdminController implements AdminsApi {
 
     private final AdminMapper mapper;

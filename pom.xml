@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.pillwatcher</groupId>
-	<artifactId>dpb</artifactId>
+	<artifactId>dpb-admin-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dpb-admin-service</name>
 	<description>PillWatcher Dispenser Admin Service</description>
