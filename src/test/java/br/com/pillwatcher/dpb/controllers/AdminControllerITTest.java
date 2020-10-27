@@ -101,4 +101,29 @@ public class AdminControllerITTest {
         //then
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    public void deleteAdminShouldReturnOkStatus() {
+        //given
+        String path = UriComponentsBuilder
+                .fromUriString(URI_ADMINS_CPF)
+                .buildAndExpand(FAKE_CPF)
+                .getPath();
+
+        repository.save(getAdmin());
+
+        Admin admin = getAdmin();
+        AdminDTOForUpdate adminDto = mapper.toAdminForUpdate(admin);
+
+        HttpEntity<AdminDTOForUpdate> entity = new HttpEntity<>(adminDto);
+
+        ResponseEntity<Void> response = this.testRestTemplate.exchange(
+                getUrl(path, this.port),
+                HttpMethod.DELETE,
+                entity,
+                Void.class);
+
+        //then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 }

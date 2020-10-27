@@ -3,6 +3,7 @@ package br.com.pillwatcher.dpb.controllers;
 import br.com.pillwatcher.dpb.entities.Admin;
 import br.com.pillwatcher.dpb.mappers.AdminMapper;
 import br.com.pillwatcher.dpb.services.AdminService;
+import io.swagger.annotations.Api;
 import io.swagger.api.AdminsApi;
 import io.swagger.model.AdminDTOForCreate;
 import io.swagger.model.AdminDTOForGet;
@@ -22,6 +23,7 @@ import static br.com.pillwatcher.dpb.constants.UrlConstants.URI_ADMINS_CPF;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@Api(tags = {"Admin"})
 public class AdminController implements AdminsApi {
 
     private final AdminMapper mapper;
@@ -77,6 +79,23 @@ public class AdminController implements AdminsApi {
         log.debug("AdminController.updateAdmin - End - Input: {} - Output: {}", cpf, response);
 
         return response;
+    }
 
+    @Override
+    @DeleteMapping(value = URI_ADMINS_CPF)
+    public ResponseEntity<Void> deleteAdmin(final String cpf) {
+
+        log.info("AdminController.deleteAdmin - Start - Input - [{}]", cpf);
+        log.debug("AdminController.deleteAdmin - Start - Input - Order: {} ", cpf);
+
+        service.deleteAdmin(cpf);
+
+        ResponseEntity<Void> response = ResponseEntity
+                .ok()
+                .build();
+
+        log.debug("AdminController.deleteAdmin - End - Input: {} - Output: {}", cpf, response);
+
+        return response;
     }
 }
